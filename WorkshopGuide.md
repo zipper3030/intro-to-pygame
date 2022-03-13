@@ -1,12 +1,3 @@
-
-
-1. Start with creating screen
-2. Basic game loop and quit event - demonstrate printing events to screen
-3. Drawing and loading objects to the screen (rect takes  x,y, show 400, 400, then 350, 350), increase in y position, you move down. then player image
-4. Making our code object-oriented, creating a Game class
-
-
-
 # Beginning Game Design with Python
 
 Improve your Python programming skills by creating a simple computer game! In this workshop you will be introduced to [Pygame](https://www.pygame.org/wiki/about), a free and open-source library for creating computer games in Python.  Specifically, you will create a simple “Frogger” style game that will introduce you to the following concepts:  drawing graphics to the screen, capturing keyboard input and representing movement, creating basic collision detection, increasing difficulty, and implementing game loops with win/lose conditions.  
