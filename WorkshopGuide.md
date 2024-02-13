@@ -135,7 +135,7 @@ First, we create a new variable for tracking our game over condition, aptly name
 
 Within the `while` loop, we use a `for` loop to cycle through `events`. (When working with `while` loops, always watch your indentation closely so you don’t accidentally create an infinite loop.)  To log user input (mouse placement, key presses, closing the window, etc.), we use the `pygame.event.get()` function.  This function creates a queue of all events and allows the program to respond accordingly. To control our game over condition, we check if the built-in `quit` event (meaning the user has closed the game screen window) has occurred.  We also print all events to the console so we can monitor the events unfolding. We also `update()` our game display and tick our `clock` each iteration of the loop.
 
-Lastly, we set our game_screen to have a basic white fill. We then `quit` out of Pygame (_outside_ of the `while` loop).
+Lastly, we set our `game_screen` to have a basic white fill. We then `quit` out of Pygame (_outside_ of the `while` loop).
 
 ### Running the Game
 
@@ -173,7 +173,7 @@ Let's begin actual development by creating a new class for our game objects.
 
 ### The GameObjects Class
 
-Because we will be creating several different types of objects (a player object, enemies, and treasure), let's create a parent object class from which we can derive each of the other classes. This `GameObjects` class will house all of the basic attributes and functionality that each object shares in common with the others.
+Because we will be creating several different types of objects (a player object, enemies, and treasure), let's create a parent object class from which we can derive each of the other classes. This `GameObjects` class will house all of the basic attributes and functionality that each object shares in common with the others. Outside of our `Game` class, create a new class called `GameObjects`:
 
 ```python
 class GameObjects:
@@ -238,7 +238,7 @@ class PlayerCharacter(GameObjects):
 
 As you can see, we include the `GameObjects` class in our `PlayerCharacter` class declaration to indicate that `PlayerCharacter` is a _subclass_ of `GameObjects`.
 
-Next, we create a new variable `SPEED`, which will allow us to control how fast the player can move their character. To be able to have access to the rest of the variables in the `GameObjects` class, we then use a technique called _inheritance_ with the `super()` function. `super()` allows us to utilize all the attributes and methods of our parent class (`GameObjects`).
+Next, we create a new variable `SPEED`, which will allow us to control how fast the player can move their character. To be able to have access to the rest of the variables in the `GameObjects` class, we then use a technique called _inheritance_ with the `super()` function. `super()` allows us to utilize all the attributes and methods of our parent class (`GameObjects`). For each new kind of object we create (e.g., the player-character, enemies, treasure, etc.), we can use `super()` to inherit all of the attributes and methods of the parent class so we don't have to rewrite them each time.
 
 To move our character around, we also create a new `move()` method specific to our player object. We take in two parameters: the `direction` variable we created above to track our player's movements, and a `max_height` parameter (which will be the maximum `y` size of our screen, 800) that we'll use to apply a boundary at the bottom of the screen.
 
@@ -285,11 +285,11 @@ class EnemyCharacter(GameObjects):
         self.x_pos += self.SPEED
 ```
 
-Because we want our enemies to move around, we also need to give them a speed. We'll set it at 5 for now. Next, we set up our initializer, inheriting from the parent class using `super()`. 
+Because we want our enemies to move around, we also need to give them a speed. We'll set it at 5 for now. Next, we set up our initializer, again inheriting from the parent class using `super()`. 
 
 Next, we write the logic for the enemy movement itself in a new method `move()`. Because we also don't want our enemies to move off screen, we pass in `max_width` as a parameter. Ultimately, we'd like our enemies to move both the the left and to the right of the screen. So, we check if the enemies x-position is 20 pixels to the right of the left-hand side of the screen, and if so, set the constant `SPEED` to a positive value using the `abs()` function (meaning the enemy will move right). Otherwise, if the enemy reaches the right-hand side of the screen, we set speed to a negative value (meaning the enemy will move left). Finally, we add whatever value the speed is to the x-position, effectively moving the enemy back and forth across the screen.
 
-Next, we will need to instantiate a new enemy object. In our `runGame()` method, just below our `player_character` object, create a new enemy object towards the bottom of the screen:
+Next, we will need to instantiate a new enemy object. In our `runGame()` method, just below our `player_character` object creation, create a new enemy object towards the bottom of the screen:
 
 ```python
     enemy_0 = EnemyCharacter('enemy.png', 20, 600, 50, 50)
@@ -398,7 +398,7 @@ Currently, the game ends on the very first round, whether you win or lose. This 
 
 ## Adding Level Progression
 
-Let's set this up so that each time the player makes it to the treasure, they move to the next round. Each round, we can increase the difficulty by increasing the speed of the enemies movements and increasing the amount of enemies on the screen to avoid.
+Let's set this up so that each time the player makes it to the treasure, they move to the next round. Each round, we can increase the difficulty by increasing the speed of the enemies' movements and increasing the amount of enemies on the screen to avoid.
 
 To accomplish this, let's create a new variable `level_speed` that will allow us to control both the current level, as well as the current speed of the enemies. We'll set this as a new parameter in our `runGame()` method:
 
@@ -414,7 +414,7 @@ Now when we call our `runGame()` method at the very bottom of the program, we ca
 new_game.runGame(1)
 ```
 
-You'll notice in the runGame() method above that we have added a new variable: `did_win`. We'll use this variable to determine whether or not the player actually made it to the chest, and if they did, we'll advance to the next level.
+You'll notice in the `runGame()` method above that we have added a new variable: `did_win`. We'll use this variable to determine whether or not the player actually made it to the chest, and if they did, we'll advance to the next level.
 
 So, let's add this variable to our collision detection logic:
 
@@ -456,7 +456,7 @@ In our `runGame()` method, just below where we create our `enemy_0` object, add 
         enemy_0.SPEED *= level_speed
 ```
 
-If you run the game now, you'll notice that every time you make it to the treasure, the game resets, and the enemy gets a little faster each time. 
+If you run the game now, you'll notice that every time you make it to the treasure, the game resets, and the enemy gets a little quicker each time. 
 
 ## Adding More Enemies
 
@@ -508,4 +508,5 @@ Well done! You have just created your first computer game in Python. Although th
 2. Spawn the treasure chest in random locations each level.
 3. Make enemies move up and down, in addition to left and right. Add randomness to their movements to make it more tricky for the player to guess where they are headed. Alternatively, you could have them attempt to follow the player, by tracking the player's position relative to their own.
 4. Create "power-up" objects that can give your frog a speed boost, or temporary invincibility, or other perks.
+5. Create a projectile that the player can shoot at the enemies to destroy them.
 
