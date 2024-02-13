@@ -9,7 +9,7 @@ By default, Pygame is not included with Python installations. For this workshop,
 Next, we'll need to install Pygame via `pip` in the command line or terminal. Open up your command prompt and type the following command:
 
 ```console
-pip install pygame
+python3 -m pip install -U pygame --user
 ```
 The command should automatically install the latest version of Pygame on your machine. __Note:__  If you happen to have Pygame already installed, you can upgrade to the latest version with the `--upgrade` flag:
 
@@ -70,6 +70,7 @@ clock = pygame.time.Clock()
 TICK_RATE = 60
 # font set-up
 pygame.font.init()
+# you can load in your own fonts, but SysFont below allows you to access fonts already installed on your machine
 font = pygame.font.SysFont('comicsans', 75)
 ```
 
