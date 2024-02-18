@@ -161,8 +161,8 @@ Let's say we wanted to draw a simple rectangle and circle to the screen. In the 
 
 ```python
 # demonstrates drawing
-pygame.draw.rect(game_screen, BLACK_COLOR, (350, 350, 100, 100)) # surface, color, (x, y, width, height)
-pygame.draw.circle(game_screen, BLACK_COLOR, (400, 300), 50)
+pygame.draw.rect(self.game_screen, BLACK_COLOR, (350, 350, 100, 100)) # surface, color, (x, y, width, height)
+pygame.draw.circle(self.game_screen, BLACK_COLOR, (400, 300), 50)
 ```
 
 To draw our rectangle, we’ll use the `draw.rect()` function. This function requires three main parameters:  the surface to draw on, the color of the rectangle, and the rectangle object (specifying the left position, the upper position, the width, and the height). The `draw.circle()` function similarly takes a surface, a color, a center position, and a radius. The current values will create a rectangle in the center of the screen, with a circle aligned on top of it.
@@ -421,7 +421,7 @@ So, let's add this variable to our collision detection logic:
 ```python
             if player_character.detect_collision(enemy_0):
                 isGameOver = True
-                did_win = False
+                did_win = False # did they win?
                 text = font.render('Game Over :(', True, BLACK_COLOR)
                 self.game_screen.blit(text, (200, 350))
                 pygame.display.update()
@@ -429,7 +429,7 @@ So, let's add this variable to our collision detection logic:
                 break
             elif player_character.detect_collision(treasure):
                 isGameOver = True
-                did_win = True
+                did_win = True # did they win?
                 text = font.render('You won :D', True, BLACK_COLOR)
                 self.game_screen.blit(text, (200, 350))
                 pygame.display.update()
